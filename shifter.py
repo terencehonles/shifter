@@ -685,7 +685,7 @@ class Client(object):
 
     def __init__(self, address='http://localhost:9091/transmission/rpc',
                  scheme=None, host=None, port=None, path=None, query=None,
-                 timeout=None, urlopener=None):
+                 username=None, password=None, timeout=None, urlopener=None):
 
         self.session = SessionMethods(self)
         self.torrent = TorrentMethods(self)
@@ -710,6 +710,13 @@ class Client(object):
             self.connection.add_handler(TransmissionSessionHandler())
         else:
             self.connection = urllib2.build_opener(TransmissionSessionHandler)
+
+        if username is not None:
+            manager = urllib2.HTTPPasswordMgrWithDefaultRealm()
+            manager.add_password(None, self.endpoint,
+                                 username, password or '')
+
+            self.connection.add_handler(urllib2.HTTPBasicAuthHandler(manager))
 
     def _get_rpc_version(self):
         if self._rpc_version: return self._rpc_version

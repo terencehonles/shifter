@@ -68,6 +68,10 @@ To use different connection information:
 
   >>> client = shifter.Client(host="github.com")
 
+- default URL, but use a username and password
+
+  >>> client = shifter.Client(username='username', password='password')
+
 ``shifter``'s RPC methods are namespaced into four sections:
 
 :Client_:

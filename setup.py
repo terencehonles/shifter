@@ -14,7 +14,7 @@ with open('README') as readme:
 
 setup(
         name = 'shifter',
-        version = '2.40',
+        version = '2.75',
         py_modules = ['shifter'],
 
         author = 'Terence Honles',
